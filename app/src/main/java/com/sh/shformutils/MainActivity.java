@@ -11,12 +11,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.sh.shformutils.form.CheckType;
-import com.sh.shformutils.form.FromCheck;
-import com.sh.shformutils.form.FromCheckInterface;
-import com.sh.shformutils.form.FromInit;
-import com.sh.shformutils.form.FromInjection;
-import com.sh.shformutils.form.FromUtls;
+import com.sh.shfrom.check.CheckType;
+import com.sh.shfrom.annotation.FromCheck;
+import com.sh.shfrom.check.FromCheckInterface;
+import com.sh.shfrom.form.FromInit;
+import com.sh.shfrom.annotation.FromInjection;
+import com.sh.shfrom.form.FromUtls;
+
 
 public class MainActivity extends AppCompatActivity implements FromCheckInterface {
     @FromInjection(name = "name", message = "名字")

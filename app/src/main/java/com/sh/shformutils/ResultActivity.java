@@ -3,15 +3,14 @@ package com.sh.shformutils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.sh.shformutils.form.CheckType;
-import com.sh.shformutils.form.FromCheck;
-import com.sh.shformutils.form.FromInit;
-import com.sh.shformutils.form.FromInjection;
-import com.sh.shformutils.form.FromUtls;
+import com.sh.shfrom.check.CheckType;
+import com.sh.shfrom.annotation.FromCheck;
+import com.sh.shfrom.form.FromInit;
+import com.sh.shfrom.annotation.FromInjection;
+import com.sh.shfrom.form.FromUtls;
+
 
 public class ResultActivity extends AppCompatActivity {
     @FromInjection(name = "name", message = "名字")
