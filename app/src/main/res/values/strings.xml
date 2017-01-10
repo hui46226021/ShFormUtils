@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ShFormUtils</string>
+
+
+    <string-array name="spingarr">
+        <item>1年</item>
+        <item>2年</item>
+        <item>3年</item>
+        <item>4年</item>
+    </string-array>
+
+</resources>
