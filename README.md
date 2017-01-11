@@ -39,7 +39,7 @@ compile 'com.sh.shformutils:shform:2.0.0'
            }
    ~~~
    * 3.在 onDestroy 里 注销 表单
-        ~~~java
+  ~~~java
            @Override
            protected void onDestroy() {
            /**
@@ -48,9 +48,9 @@ compile 'com.sh.shformutils:shform:2.0.0'
            FromInit.deleteInjection(this);
            super.onDestroy();
            }
-        ~~~
+  ~~~
    * 4.通过 @FromInjection 绑定控件
-        ~~~java
+  ~~~java
          @FromInjection(name = "name", message = "名字")
          EditText nameEdit;
          @FromCheck(type = CheckType.Phone)
@@ -62,9 +62,9 @@ compile 'com.sh.shformutils:shform:2.0.0'
          Spinner spinner;
          @FromInjection(name = "married")
          CheckBox married;
-        ~~~
+   ~~~
    * 4.调用映射方法
-        ~~~java
+   ~~~java
              /**
                * 表单自动生成对象
                */
@@ -73,7 +73,7 @@ compile 'com.sh.shformutils:shform:2.0.0'
                * 实体对象 映射到表单 返回true 表示映射成功
                */
                FromUtls.objectToFrom(this,userModel);
-        ~~~
+  ~~~
 ![](1.gif)
 *  表单参数检查
 
