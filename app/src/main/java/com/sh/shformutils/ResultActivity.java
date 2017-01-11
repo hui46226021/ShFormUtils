@@ -45,6 +45,9 @@ public class ResultActivity extends AppCompatActivity {
 
         UserModel userModel = (UserModel) getIntent().getSerializableExtra("userModel");
         if(userModel!=null){
+            /**
+             * 实体对象 映射到表单 返回true 表示映射成功
+             */
             FromUtls.objectToFrom(this,userModel);
         }
 

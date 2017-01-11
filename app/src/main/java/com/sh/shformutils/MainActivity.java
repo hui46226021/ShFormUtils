@@ -67,9 +67,11 @@ public class MainActivity extends AppCompatActivity implements FromCheckInterfac
 
 
     public void submit(){
-       Object object = FromUtls.fromToObjectAndCheck(this,UserModel.class);
-        if(object!=null){
-            UserModel userModel = (UserModel) object;
+        /**
+         * 表单自动生成对象
+         */
+        UserModel userModel = FromUtls.fromToObjectAndCheck(this,UserModel.class);
+        if(userModel!=null){
             Log.i("userModel",userModel.toString());
             Intent intent = new Intent(this,ResultActivity.class);
             intent.putExtra("userModel",userModel);

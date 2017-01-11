@@ -17,6 +17,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Set;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 /**
  * Created by zhush on 2016/10/8.
  * E-mail zhush@jerei.com
@@ -54,7 +56,7 @@ public class FromUtls {
      * 返回空 这映射失败
      * @param classz
      */
-    public static Object fromToObjectAndCheck(FromCheckInterface page, Class classz) {
+    public static <T> T fromToObjectAndCheck(FromCheckInterface page, Class<T> classz) {
         Object object = null;
         try {
             object = classz.newInstance();
@@ -89,7 +91,7 @@ public class FromUtls {
             }
 
         }
-        return object;
+        return (T)object;
     }
 
     public static void arrangementData(View view, Field field, Object object, boolean isSet) throws Exception {
