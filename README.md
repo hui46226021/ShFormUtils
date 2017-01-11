@@ -50,7 +50,12 @@ compile 'com.sh.shformutils:shform:2.0.0'
   ~~~
    * 4.通过 @FromInjection 绑定控件
   ~~~java
-         @FromInjection(name = "name", message = "名字")
+       /**
+        * name 对应 实体类 字段名
+        * message 参数为空的时候 默认提示 的字符串
+        * isNull  该字段是否可以为空  默认 false
+        */
+         @FromInjection(name = "name", message = "名字",isNull = true)
          EditText nameEdit;
          @FromCheck(type = CheckType.Phone)
          @FromInjection(name = "phone", message = "电话")
