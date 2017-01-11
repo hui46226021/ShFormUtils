@@ -1,4 +1,4 @@
-package com.sh.shfrom.check;
+package com.sh.shform.check;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

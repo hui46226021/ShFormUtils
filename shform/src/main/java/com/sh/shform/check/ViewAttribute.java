@@ -1,8 +1,6 @@
-package com.sh.shfrom.check;
+package com.sh.shform.check;
 
 import android.view.View;
-
-import com.sh.shfrom.check.CheckType;
 
 /**
  * Created by zhush on 2016/10/8.

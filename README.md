@@ -7,19 +7,19 @@ Download the latest JAR or grab via Maven:
 <dependency>
   <groupId>com.sh.shformutils</groupId>
   <artifactId>shform</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
    <type>pom</type>
 </dependency>
 ~~~
 or Gradle:
 ~~~gradle
-compile 'com.sh.shformutils:shform:2.0.0'
+compile 'com.sh.shformutils:shform:2.0.1'
 ~~~
 #功能
 * 表单对象映射
 
-   * 1.页面实现 FromCheckInterface 接口
-   * 2.开启表单注入 FromInit.injection(this);
+   * 1.页面实现 FormCheckInterface 接口
+   * 2.开启表单注入 FormInit.injection(this);
    ~~~java
          @Override
            protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ compile 'com.sh.shformutils:shform:2.0.0'
                /**
                 * 初始化表单注入  要在 所有控件初始化成功后 调用
                 */
-               FromInit.injection(this);
+               FormInit.injection(this);
            }
    ~~~
    * 3.在 onDestroy 里 注销 表单
@@ -44,27 +44,27 @@ compile 'com.sh.shformutils:shform:2.0.0'
            /**
             * 注销表单
             */
-           FromInit.deleteInjection(this);
+           FormInit.deleteInjection(this);
            super.onDestroy();
            }
   ~~~
-   * 4.通过 @FromInjection 绑定控件
+   * 4.通过 @FormInjection 绑定控件
   ~~~java
        /**
         * name 对应 实体类 字段名
         * message 参数为空的时候 默认提示 的字符串
         * isNull  该字段是否可以为空  默认 false
         */
-         @FromInjection(name = "name", message = "名字",isNull = true)
+         @FormInjection(name = "name", message = "名字",isNull = true)
          EditText nameEdit;
-         @FromCheck(type = CheckType.Phone)
-         @FromInjection(name = "phone", message = "电话")
+         @FormCheck(type = CheckType.Phone)
+         @FormInjection(name = "phone", message = "电话")
          EditText phoneEdit;
-         @FromInjection(name = "profession", message = "公司-职业")
+         @FormInjection(name = "profession", message = "公司-职业")
          EditText professionEdit;
-         @FromInjection(name = "workingLife", message = "工作时间")
+         @FormInjection(name = "workingLife", message = "工作时间")
          Spinner spinner;
-         @FromInjection(name = "married")
+         @FormInjection(name = "married")
          CheckBox married;
    ~~~
    * 4.调用映射方法
@@ -72,32 +72,32 @@ compile 'com.sh.shformutils:shform:2.0.0'
         /**
           * 表单自动生成对象
           */
-         UserModel userModel = FromUtls.fromToObjectAndCheck(this,UserModel.class);
+         UserModel userModel = FormUtls.formToObjectAndCheck(this,UserModel.class);
         /**
           * 实体对象 映射到表单 返回true 表示映射成功
           */
-         FromUtls.objectToFrom(this,userModel);
+         FormUtls.objectToForm(this,userModel);
   ~~~
 ![](1.gif)
 *  表单参数检查
-    * 1.使用 @FromCheck 实现表单验证
+    * 1.使用 @FormCheck 实现表单验证
 ~~~java
    //type 是 验证类型枚举   默认 是自定义验证
-    @FromCheck(type = CheckType.Phone)
-    @FromInjection(name = "phone", message = "电话")
+    @FormCheck(type = CheckType.Phone)
+    @FormInjection(name = "phone", message = "电话")
     EditText phoneEdit;
-    @FromCheck
-    @FromInjection(name = "profession", message = "公司-职业")
+    @FormCheck
+    @FormInjection(name = "profession", message = "公司-职业")
     EditText professionEdit;
 
         /**
-         * 通过 实现 FromCheckInterface 接口的 fromCheck
+         * 通过 实现 FormCheckInterface 接口的 formCheck
          * 自定定义 表单检查 默认要返回true
          * @param v
          * @return
          */
         @Override
-        public boolean fromCheck(View v) {
+        public boolean formCheck(View v) {
             switch (v.getId()){
                 case R.id.profession:
                     if(!(professionEdit.getText()+"").contains("-")){
@@ -115,7 +115,7 @@ compile 'com.sh.shformutils:shform:2.0.0'
          * @param message
          */
         @Override
-        public void fromCheckParamCall(View v, String message) {
+        public void formCheckParamCall(View v, String message) {
             Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
         }
         /**
@@ -124,7 +124,7 @@ compile 'com.sh.shformutils:shform:2.0.0'
          * @param message
          */
         @Override
-        public void fromCheckNullCall(View v, String message) {
+        public void formCheckNullCall(View v, String message) {
             Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
         }
 ~~~

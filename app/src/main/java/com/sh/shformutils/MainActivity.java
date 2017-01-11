@@ -11,28 +11,33 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.sh.shfrom.check.CheckType;
-import com.sh.shfrom.annotation.FromCheck;
-import com.sh.shfrom.check.FromCheckInterface;
-import com.sh.shfrom.form.FromInit;
-import com.sh.shfrom.annotation.FromInjection;
-import com.sh.shfrom.form.FromUtls;
+import com.sh.shform.check.CheckType;
+import com.sh.shform.annotation.FormCheck;
+import com.sh.shform.check.FormCheckInterface;
+import com.sh.shform.form.FormInit;
+import com.sh.shform.annotation.FormInjection;
+import com.sh.shform.form.FormUtls;
 
 
-public class MainActivity extends AppCompatActivity implements FromCheckInterface {
-    @FromInjection(name = "name", message = "名字")
+public class MainActivity extends AppCompatActivity implements FormCheckInterface {
+    /**
+     * name 对应 实体类 字段名
+     * message 参数为空的时候 默认提示 的字符串
+     * isNull  该字段是否可以为空  默认 false
+     */
+    @FormInjection(name = "name", message = "名字",isNull = true)
     EditText nameEdit;
-    @FromCheck(type = CheckType.Phone)
-    @FromInjection(name = "phone", message = "电话")
+    @FormCheck(type = CheckType.Phone)
+    @FormInjection(name = "phone", message = "电话")
     EditText phoneEdit;
-    @FromCheck
-    @FromInjection(name = "profession", message = "公司-职业")
+    @FormCheck
+    @FormInjection(name = "profession", message = "公司-职业")
     EditText professionEdit;
-    @FromInjection(name = "workingLife", message = "工作时间")
+    @FormInjection(name = "workingLife", message = "工作时间")
     Spinner spinner;
-    @FromInjection(name = "married")
+    @FormInjection(name = "married")
     CheckBox married;
-    @FromInjection(name = "party")
+    @FormInjection(name = "party")
     CheckBox party;
 
     Button submit;
@@ -56,12 +61,12 @@ public class MainActivity extends AppCompatActivity implements FromCheckInterfac
         /**
          * 初始化表单注入  要在 所有控件初始化成功后 调用
          */
-        FromInit.injection(this);
+        FormInit.injection(this);
     }
 
     @Override
     protected void onDestroy() {
-        FromInit.deleteInjection(this);
+        FormInit.deleteInjection(this);
         super.onDestroy();
     }
 
@@ -70,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements FromCheckInterfac
         /**
          * 表单自动生成对象
          */
-        UserModel userModel = FromUtls.fromToObjectAndCheck(this,UserModel.class);
+        UserModel userModel = FormUtls.formToObjectAndCheck(this,UserModel.class);
         if(userModel!=null){
             Log.i("userModel",userModel.toString());
             Intent intent = new Intent(this,ResultActivity.class);
@@ -81,13 +86,13 @@ public class MainActivity extends AppCompatActivity implements FromCheckInterfac
     }
 
     /**
-     * 通过 实现 FromCheckInterface 接口的 fromCheck
+     * 通过 实现 FormCheckInterface 接口的 formCheck
      * 自定定义 表单检查 默认要返回true
      * @param v
      * @return
      */
     @Override
-    public boolean fromCheck(View v) {
+    public boolean formCheck(View v) {
         switch (v.getId()){
             case R.id.profession:
                 if(!(professionEdit.getText()+"").contains("-")){
@@ -105,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements FromCheckInterfac
      * @param message
      */
     @Override
-    public void fromCheckParamCall(View v, String message) {
+    public void formCheckParamCall(View v, String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
     /**
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements FromCheckInterfac
      * @param message
      */
     @Override
-    public void fromCheckNullCall(View v, String message) {
+    public void formCheckNullCall(View v, String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 }

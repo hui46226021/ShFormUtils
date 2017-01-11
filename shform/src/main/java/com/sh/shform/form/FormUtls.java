@@ -1,4 +1,4 @@
-package com.sh.shfrom.form;
+package com.sh.shform.form;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -8,29 +8,27 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.sh.shfrom.check.FromCheckInterface;
-import com.sh.shfrom.check.RoutineVerification;
-import com.sh.shfrom.check.ViewAttribute;
+import com.sh.shform.check.FormCheckInterface;
+import com.sh.shform.check.RoutineVerification;
+import com.sh.shform.check.ViewAttribute;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Set;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-
 /**
  * Created by zhush on 2016/10/8.
  * E-mail zhush@jerei.com
  */
-public class FromUtls {
+public class FormUtls {
     /**
      * 设置表单初始数据
      *
      * @param object
      */
-    public static boolean objectToFrom(Object page, Object object) {
-        HashMap<String, ViewAttribute> map = FromInit.allLineFromViewMap.get(page.getClass().getName());
+    public static boolean objectToForm(Object page, Object object) {
+        HashMap<String, ViewAttribute> map = FormInit.allLineFormViewMap.get(page.getClass().getName());
         if (map == null) {
             return false;
         }
@@ -56,7 +54,7 @@ public class FromUtls {
      * 返回空 这映射失败
      * @param classz
      */
-    public static <T> T fromToObjectAndCheck(FromCheckInterface page, Class<T> classz) {
+    public static <T> T formToObjectAndCheck(FormCheckInterface page, Class<T> classz) {
         Object object = null;
         try {
             object = classz.newInstance();
@@ -67,10 +65,10 @@ public class FromUtls {
 
         }
         if(object==null){
-            Log.e("FromUtls","该对象必须要有 public 的 空构造函数");
+            Log.e("FormUtls","该对象必须要有 public 的 空构造函数");
             return null;
         }
-        HashMap<String, ViewAttribute> map = FromInit.allLineFromViewMap.get(page.getClass().getName());
+        HashMap<String, ViewAttribute> map = FormInit.allLineFormViewMap.get(page.getClass().getName());
         if (map == null) {
             return null;
         }
@@ -246,14 +244,14 @@ public class FromUtls {
      *
      * @return
      */
-    public static boolean checkParam(FromCheckInterface page) {
-        HashMap<String, ViewAttribute> map = FromInit.allLineFromViewMap.get(page.getClass().getName());
+    public static boolean checkParam(FormCheckInterface page) {
+        HashMap<String, ViewAttribute> map = FormInit.allLineFormViewMap.get(page.getClass().getName());
         if (map != null) {
             Set<String> keys1 = map.keySet();
             for (String key : keys1) {
                 ViewAttribute va = map.get(key);
                 if (TextUtils.isEmpty(getContent(va.getView())) && !va.isNull()) {
-                    page.fromCheckNullCall(va.getView(), "请正确输入" + va.getMessage());
+                    page.formCheckNullCall(va.getView(), "请正确输入" + va.getMessage());
                     return false;
                 }
 
@@ -274,10 +272,10 @@ public class FromUtls {
      * @param va
      * @return
      */
-    public static boolean check(FromCheckInterface page, ViewAttribute va) {
+    public static boolean check(FormCheckInterface page, ViewAttribute va) {
         //自定义检查信息
-        if (!page.fromCheck(va.getView())) {
-//            page.fromCheckParamCall(va.getView(), "");
+        if (!page.formCheck(va.getView())) {
+//            page.formCheckParamCall(va.getView(), "");
             return false;
         }
 
@@ -285,19 +283,19 @@ public class FromUtls {
             case Phone:
                 if (!RoutineVerification.isPhoneNum(getContent(va.getView()))) {
 
-                    page.fromCheckParamCall(va.getView(), "请正确输入手机号");
+                    page.formCheckParamCall(va.getView(), "请正确输入手机号");
                     return false;
                 }
                 break;
             case Password:
                 if (!RoutineVerification.is6To12(getContent(va.getView()))) {
-                    page.fromCheckParamCall(va.getView(), "请正确输入密码");
+                    page.formCheckParamCall(va.getView(), "请正确输入密码");
                     return false;
                 }
                 break;
             case Email:
                 if (!RoutineVerification.isEmail(getContent(va.getView()))) {
-                    page.fromCheckParamCall(va.getView(), "请正确输入邮箱");
+                    page.formCheckParamCall(va.getView(), "请正确输入邮箱");
                     return false;
                 }
                 break;

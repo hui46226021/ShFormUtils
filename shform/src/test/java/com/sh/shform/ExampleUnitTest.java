@@ -1,4 +1,4 @@
-package com.sh.shfrom;
+package com.sh.shform;
 
 import org.junit.Test;
 

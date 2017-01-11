@@ -1,4 +1,4 @@
-package com.sh.shfrom;
+package com.sh.shform;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

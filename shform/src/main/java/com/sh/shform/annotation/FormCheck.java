@@ -1,6 +1,6 @@
-package com.sh.shfrom.annotation;
+package com.sh.shform.annotation;
 
-import com.sh.shfrom.check.CheckType;
+import com.sh.shform.check.CheckType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FromCheck {
+public @interface FormCheck {
     //表单检查类型
     CheckType type() default CheckType.CUSTOM;
 }
