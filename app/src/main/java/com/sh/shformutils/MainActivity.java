@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements FromCheckInterfac
     }
 
     /**
+     * 通过 实现 FromCheckInterface 接口的 fromCheck
      * 自定定义 表单检查 默认要返回true
      * @param v
      * @return

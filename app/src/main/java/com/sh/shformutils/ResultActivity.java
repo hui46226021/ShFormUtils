@@ -15,6 +15,7 @@ import com.sh.shfrom.form.FromUtls;
 public class ResultActivity extends AppCompatActivity {
     @FromInjection(name = "name", message = "名字")
     TextView nameEdit;
+    //type 是 验证类型枚举   默认 是自定义验证
     @FromCheck(type = CheckType.Phone)
     @FromInjection(name = "phone", message = "电话")
     TextView phoneEdit;
