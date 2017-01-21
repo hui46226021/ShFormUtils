@@ -1,4 +1,4 @@
-package com.sh.shform.form;
+package com.sh.zsh.code.form;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -8,9 +8,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.sh.shform.check.FormCheckInterface;
-import com.sh.shform.check.RoutineVerification;
-import com.sh.shform.check.ViewAttribute;
+
+import com.sh.zsh.code.check.FormCheckInterface;
+import com.sh.zsh.code.check.RoutineVerification;
+import com.sh.zsh.code.check.ViewAttribute;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -280,24 +281,50 @@ public class FormUtls {
         }
 
         switch (va.getCheckType()) {
-            case Phone:
+            case PHONE:
                 if (!RoutineVerification.isPhoneNum(getContent(va.getView()))) {
 
                     page.formCheckParamCall(va.getView(), "请正确输入手机号");
                     return false;
                 }
                 break;
-            case Password:
+            case PASSWORD:
                 if (!RoutineVerification.is6To12(getContent(va.getView()))) {
                     page.formCheckParamCall(va.getView(), "请正确输入密码");
                     return false;
                 }
                 break;
-            case Email:
+            case EMAIL:
                 if (!RoutineVerification.isEmail(getContent(va.getView()))) {
                     page.formCheckParamCall(va.getView(), "请正确输入邮箱");
                     return false;
                 }
+            case CHINESE:
+                if (!RoutineVerification.isChinese(getContent(va.getView()))) {
+                    page.formCheckParamCall(va.getView(), "只能输入中文");
+                    return false;
+                }
+            case IDCARD:
+                if (!RoutineVerification.isIdCard(getContent(va.getView()))) {
+                    page.formCheckParamCall(va.getView(), "身份证格式不正确");
+                    return false;
+                }
+            case ISDATA:
+                if (!RoutineVerification.isData(getContent(va.getView()))) {
+                    page.formCheckParamCall(va.getView(), "日期格式不正确");
+                    return false;
+                }
+            case AMOUNT_MONEY:
+                if (!RoutineVerification.isAmountMoney(getContent(va.getView()))) {
+                    page.formCheckParamCall(va.getView(), "金额不正确，最多两位小数");
+                    return false;
+                }
+            case URL:
+                if (!RoutineVerification.isURL(getContent(va.getView()))) {
+                    page.formCheckParamCall(va.getView(), "请输入正确的url地址");
+                    return false;
+                }
+
                 break;
         }
         return true;

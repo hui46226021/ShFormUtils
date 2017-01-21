@@ -1,6 +1,6 @@
-package com.sh.shform.annotation;
+package com.sh.zsh.code.annotation;
 
-import com.sh.shform.check.CheckType;
+import com.sh.zsh.code.check.CheckType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

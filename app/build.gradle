@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.sh.shformutils"
+        applicationId "com.sh.zsh.code"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -28,4 +28,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.1.0'
     compile project(path: ':shform')
+
 }

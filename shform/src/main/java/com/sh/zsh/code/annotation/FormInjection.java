@@ -1,4 +1,4 @@
-package com.sh.shform.annotation;
+package com.sh.zsh.code.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
