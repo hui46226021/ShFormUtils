@@ -5,15 +5,15 @@ android表单映射框架
 Download the latest JAR or grab via Maven:
 ~~~xml
 <dependency>
-  <groupId>com.sh.shformutils</groupId>
+  <groupId>com.sh.zsh.code</groupId>
   <artifactId>shform</artifactId>
-  <version>2.0.1</version>
-   <type>pom</type>
+  <version>2.0.3</version>
+  <type>pom</type>
 </dependency>
 ~~~
 or Gradle:
 ~~~gradle
-compile 'com.sh.shformutils:shform:2.0.1'
+compile 'com.sh.zsh.code:shform:2.0.3'
 ~~~
 #功能
 * 表单对象映射
