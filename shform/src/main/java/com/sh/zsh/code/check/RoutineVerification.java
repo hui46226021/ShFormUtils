@@ -33,6 +33,8 @@ public class RoutineVerification {
     static final String STANDARD_DATE = "^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$";
     //金额校验，精确到2位小数
     static final String AMOUNTMONEY = "^[0-9]+(.[0-9]{2})?$";
+    //纯数字
+    static final String AMOUNT = "^[0-9]*$";
     //URL
     static final String URL = "^(f|ht){1}(tp|tps):\\/\\/([\\w-]+\\.)+[\\w-]+(\\/[\\w- ./?%&=]*)?";
 
@@ -128,6 +130,14 @@ public class RoutineVerification {
      */
     public static boolean isAmountMoney(String str) {
         return verification(str, AMOUNTMONEY);
+    }
+    /**
+     * 金额校验，精确到2位小数
+     * @param str
+     * @return
+     */
+    public static boolean isAmount(String str) {
+        return verification(str, AMOUNT);
     }
 
     /**

@@ -3,9 +3,10 @@ package com.sh.zsh.code.form;
 import android.text.TextUtils;
 import android.view.View;
 
+
+import com.sh.zsh.code.annotation.FormCheck;
 import com.sh.zsh.code.annotation.FormInjection;
 import com.sh.zsh.code.check.CheckType;
-import com.sh.zsh.code.annotation.FormCheck;
 import com.sh.zsh.code.check.ViewAttribute;
 
 import java.lang.reflect.Field;

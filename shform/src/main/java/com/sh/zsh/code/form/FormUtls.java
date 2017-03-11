@@ -42,7 +42,7 @@ public class FormUtls {
             try {
                 arrangementData(va.getView(), field[i], object, false);
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
         return true;
@@ -93,6 +93,38 @@ public class FormUtls {
         return (T)object;
     }
 
+
+    /**
+     * 获取表单数据并且檢查
+     * 返回空 这映射失败
+     */
+    public static Object formToObjectAndCheckByObject(FormCheckInterface page,Object object) {
+
+        HashMap<String, ViewAttribute> map = FormInit.allLineFormViewMap.get(page.getClass().getName());
+        if (map == null) {
+            return null;
+        }
+        if (!checkParam(page)) {
+            return null;
+        }
+        Field[] field = object.getClass().getDeclaredFields();
+        for (int i = 0; i < field.length; i++) {
+            String name = field[i].getName();
+            ViewAttribute va = map.get(name);
+            if (va != null) {
+                try {
+                    arrangementData(va.getView(), field[i], object, true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("表单映射失败");
+                }
+            }
+
+        }
+        return object;
+    }
+
+
     public static void arrangementData(View view, Field field, Object object, boolean isSet) throws Exception {
 
         String name = field.getName();
@@ -114,7 +146,7 @@ public class FormUtls {
             }
         }
 
-        if (type.equals("class java.lang.Integer")) {
+        if (type.equals("class java.lang.Integer")||type.equals("int")) {
 
             Method m = null;
             if (isSet) {
@@ -134,7 +166,7 @@ public class FormUtls {
 
         }
 
-        if (type.equals("class java.lang.Boolean")) {
+        if (type.equals("class java.lang.Boolean")||type.equals("boolean")) {
 
             Method m = null;
             if (isSet) {
@@ -151,7 +183,7 @@ public class FormUtls {
 
         }
 
-        if (type.equals("class java.lang.Long")) {
+        if (type.equals("class java.lang.Long")||type.equals("long")) {
 
             Method m = null;
             if (isSet) {
@@ -165,7 +197,7 @@ public class FormUtls {
             }
 
         }
-        if (type.equals("class java.lang.Double")) {
+        if (type.equals("class java.lang.Double")||type.equals("double")) {
 
             Method m = null;
             if (isSet) {
@@ -183,6 +215,7 @@ public class FormUtls {
     }
 
     static String getContent(View v) {
+
         if (v instanceof CheckBox) {
 
             boolean selected =((CheckBox) v).isChecked();
@@ -196,7 +229,6 @@ public class FormUtls {
         }
 
         if (v instanceof Spinner) {
-//            return ((Spinner) v).getSelectedItemPosition() + "";
 
             return  ((Spinner) v).getSelectedItem().toString();
         }
@@ -206,6 +238,11 @@ public class FormUtls {
     }
 
     static void setContent(View v, String value) {
+        if(value.equals("null")){
+            return;
+        }
+
+
         if (v instanceof CheckBox) {
             boolean selected = false;
             try {
@@ -246,14 +283,21 @@ public class FormUtls {
      * @return
      */
     public static boolean checkParam(FormCheckInterface page) {
+
+
         HashMap<String, ViewAttribute> map = FormInit.allLineFormViewMap.get(page.getClass().getName());
         if (map != null) {
             Set<String> keys1 = map.keySet();
             for (String key : keys1) {
                 ViewAttribute va = map.get(key);
                 if (TextUtils.isEmpty(getContent(va.getView())) && !va.isNull()) {
-                    page.formCheckNullCall(va.getView(), "请正确输入" + va.getMessage());
-                    return false;
+                    if(page!=null){
+                        page.formCheckNullCall(va.getView(), "请正确输入" + va.getMessage());
+                        return false;
+                    }else {
+                        new RuntimeException("没有找到 验证界面");
+                    }
+
                 }
 
                 if (va.getCheckType() != null) {
@@ -299,29 +343,46 @@ public class FormUtls {
                     page.formCheckParamCall(va.getView(), "请正确输入邮箱");
                     return false;
                 }
+                break;
             case CHINESE:
                 if (!RoutineVerification.isChinese(getContent(va.getView()))) {
                     page.formCheckParamCall(va.getView(), "只能输入中文");
                     return false;
                 }
+                break;
             case IDCARD:
                 if (!RoutineVerification.isIdCard(getContent(va.getView()))) {
                     page.formCheckParamCall(va.getView(), "身份证格式不正确");
                     return false;
                 }
+                break;
             case ISDATA:
                 if (!RoutineVerification.isData(getContent(va.getView()))) {
                     page.formCheckParamCall(va.getView(), "日期格式不正确");
                     return false;
                 }
+                break;
             case AMOUNT_MONEY:
                 if (!RoutineVerification.isAmountMoney(getContent(va.getView()))) {
                     page.formCheckParamCall(va.getView(), "金额不正确，最多两位小数");
                     return false;
                 }
+                break;
+            case AMOUNT:
+                if (!RoutineVerification.isAmount(getContent(va.getView()))) {
+                    page.formCheckParamCall(va.getView(), "只能为存数字");
+                    return false;
+                }
+                break;
             case URL:
                 if (!RoutineVerification.isURL(getContent(va.getView()))) {
                     page.formCheckParamCall(va.getView(), "请输入正确的url地址");
+                    return false;
+                }
+                break;
+            case CUSTOM:
+                if (!page.formCheck(va.getView())) {
+
                     return false;
                 }
 

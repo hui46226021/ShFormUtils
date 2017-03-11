@@ -7,13 +7,13 @@ Download the latest JAR or grab via Maven:
 <dependency>
   <groupId>com.sh.zsh.code</groupId>
   <artifactId>shform</artifactId>
-  <version>2.0.3</version>
+  <version>2.0.8</version>
   <type>pom</type>
 </dependency>
 ~~~
 or Gradle:
 ~~~gradle
-compile 'com.sh.zsh.code:shform:2.0.3'
+compile 'com.sh.zsh.code:shform:2.0.8'
 ~~~
 #功能
 * 表单对象映射
@@ -130,4 +130,3 @@ compile 'com.sh.zsh.code:shform:2.0.3'
 ~~~
 
 
-![](2.gif)
