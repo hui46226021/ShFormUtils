@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">SHFrom</string>
+
+
+    <color name="form_colorPrimary">#e01121</color>
+    <color name="form_black">#000000</color>
+    <color name="form_white">#ffffff</color>
+
+    <!--防IOS弹框-->
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037bff</color>
+
+    <color name="background_search1">#EBEBEB</color>
+    <!--LineFromView-->
+    <color name="form_must">#ff1818</color>
+
+    <color name="form_text">#767676</color>
+    <color name="form_blue">#4082b8</color>
+    <color name="form_split_line">#dedede</color>
+
+    <color name="form_ui_background">#e6e6e6</color>
+    <color name="form_translucent">#27565555</color>
+    <color name="form_ui_all_translucent">#00ffffff</color>
+    <color name="form_ui_mask">#62000000</color>
+    <color name="form_ui_background_grey">#808080</color>
+
+    <dimen name="form_text_size">16sp</dimen>
 </resources>
