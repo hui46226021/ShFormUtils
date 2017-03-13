@@ -1,14 +1,20 @@
 apply plugin: 'com.android.library'
 
+////配置插件
+//apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.jfrog.bintray'
+//
+//version = "2.0.8"       //这个是版本号，必须填写
+
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
-
+    resourcePrefix "less_"     //这里随便填
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 24
+        minSdkVersion 9
+        targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "v1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -29,4 +35,3 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
 }
-//apply from: "bintrayUpload.gradle"
