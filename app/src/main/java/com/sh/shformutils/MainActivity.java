@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements FormCheckInterfac
      */
     @FormInjection(name = "name", message = "名字",isNull = true)
     EditText nameEdit;
-    @FormCheck(type = CheckType.Phone)
+    @FormCheck(type = CheckType.PHONE)
     @FormInjection(name = "phone", message = "电话")
     EditText phoneEdit;
     @FormCheck
@@ -113,13 +113,5 @@ public class MainActivity extends AppCompatActivity implements FormCheckInterfac
     public void formCheckParamCall(View v, String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
-    /**
-     * 表单检查 不合法回调
-     * @param v
-     * @param message
-     */
-    @Override
-    public void formCheckNullCall(View v, String message) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
-    }
+
 }

@@ -16,7 +16,7 @@ public class ResultActivity extends AppCompatActivity {
     @FormInjection(name = "name", message = "名字")
     TextView nameEdit;
     //type 是 验证类型枚举   默认 是自定义验证
-    @FormCheck(type = CheckType.Phone)
+    @FormCheck(type = CheckType.PHONE)
     @FormInjection(name = "phone", message = "电话")
     TextView phoneEdit;
     @FormCheck

@@ -1,8 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
-
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1"
@@ -30,20 +29,28 @@
             android:textColor="@color/form_text"
             android:textSize="@dimen/form_text_size"
             android:gravity="center_vertical"/>
-
+    <RelativeLayout
+        android:layout_marginRight="15dp"
+        android:gravity="end"
+        android:layout_gravity="center"
+        android:id="@+id/content_view"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"></RelativeLayout>
 
         <ImageView
+            android:visibility="invisible"
             android:id="@+id/rightArrow"
             android:layout_width="8dp"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
             android:layout_marginRight="10dp"
-
             android:src="@drawable/ic_right"/>
 
     </LinearLayout>
 
     <View
+        android:visibility="invisible"
         android:id="@+id/bottomLine"
         android:layout_width="match_parent"
         android:layout_height="1px"

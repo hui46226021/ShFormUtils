@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="less_from_view">
+        <!-- 名称 -->
+        <attr name="less_form_title" format="string" />
+        <!--是否显示底部横线-->
+        <attr name="less_form_bottomLine" format="boolean" />
+        <!--title右图片-->
+        <attr name="less_form_title_image" format="reference" />
+        <!--可以点击-->
+        <attr name="less_form_can_click" format="boolean" />
+        <!--必须填写-->
+        <attr name="less_form_must" format="boolean" />
+        <!--表单字段name-->
+        <attr name="less_form_name" format="string" />
+        <!--是否非空-->
+        <attr name="less_form_is_null" format="boolean" />
+        <!--检查类型-->
+        <attr name="less_form_check_type" >
+            <flag name = "custom" value = "10000" />
+            <flag name = "phone" value = "10001" />
+            <flag name = "email" value = "10002" />
+            <flag name = "chinese" value = "10003" />
+            <flag name = "idcard" value = "10004" />
+            <flag name = "isdata" value = "10005" />
+            <flag name = "amount_money" value = "10006" />
+            <flag name = "amount" value = "10007" />
+            <flag name = "url" value = "10008" />
+            <flag name = "password" value = "10009" />
+        </attr>
+
+        <!-- 提交的url -->
+        <attr name="less_form_url" format="string" />
+        <attr name="less_form_row_height" format="dimension" />
+        <!--是否是表单组标题-->
+        <attr name="less_form_group_titel" format="boolean" />
+        <!--是否是表单组 头布局-->
+        <attr name="less_form_group_top_layout" format="boolean" />
+        <!--时间控件是否精确到时分秒-->
+        <attr name="less_time_is_time" >
+            <flag name = "all" value = "1" />
+            <flag name = "year_month_day" value = "2" />
+            <flag name = "hours_mins" value = "3" />
+            <flag name = "month_day_hour_min" value = "4" />
+            <flag name = "year_month" value = "5" />
+        </attr>
+
+        <!--默认选中第一项-->
+        <attr name="less_form_spi_sel" format="integer" />
+
+
+    </declare-styleable>
+
+</resources>

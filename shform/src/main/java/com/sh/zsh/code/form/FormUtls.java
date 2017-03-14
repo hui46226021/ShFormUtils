@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.sh.zsh.code.check.FormCheckInterface;
 import com.sh.zsh.code.check.RoutineVerification;
 import com.sh.zsh.code.check.ViewAttribute;
+import com.sh.zsh.code.layout.view.FormSpinner;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -85,7 +86,7 @@ public class FormUtls {
                     arrangementData(va.getView(), field[i], object, true);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    throw new RuntimeException("表单映射失败");
+                    throw new RuntimeException("表单映射失败"+e.getMessage());
                 }
             }
 
@@ -125,42 +126,37 @@ public class FormUtls {
     }
 
 
-    public static void arrangementData(View view, Field field, Object object, boolean isSet) throws Exception {
+    private static void arrangementData(View view, Field field, Object object, boolean isSet) throws Exception {
 
         String name = field.getName();
         name = name.substring(0, 1).toUpperCase() + name.substring(1); // 将属性的首字符大写，方便构造get，set
         String type = field.getGenericType().toString(); // 获取属性的类型
+        field.setAccessible(true); //设置些属性是可以访问的
         if (type.equals("class java.lang.String")) { // 如果type是类类型，则前面包含"class "，后面跟类名
-            Method m = null;
-            if (isSet) {
-                m = object.getClass().getMethod("set" + name, String.class);
-                m.invoke(object, getContent(view));
-            } else {
-                m = object.getClass().getMethod("get" + name);
-                String strValue = m.invoke(object) + "";
-                if (!TextUtils.isEmpty(strValue)) {
 
-                }
-                setContent(view, m.invoke(object) + "");
+            if (isSet) {
+                String value = getContent(view);
+                field.set(object,value);
+            } else {
+
+                Object val = field.get(object);//得到此属性的值
+                setContent(view,val.toString() + "");
 
             }
         }
 
         if (type.equals("class java.lang.Integer")||type.equals("int")) {
 
-            Method m = null;
-            if (isSet) {
-                m = object.getClass().getMethod("set" + name, Integer.class);
-                try {
-                    m.invoke(object, Integer.parseInt(getContent(view)));
-                }catch (Exception e){}
 
+            if (isSet) {
+                Integer value =null;
+                try {
+                    value = Integer.parseInt(getContent(view));
+                }catch (Exception e){}
+                field.set(object,value);
             } else {
-                m = object.getClass().getMethod("get" + name);
-                Integer integer = (Integer) m.invoke(object);
-                if (integer != null) {
-                    setContent(view, m.invoke(object) + "");
-                }
+                Object val = field.get(object);//得到此属性的值
+                setContent(view,val.toString() + "");
 
             }
 
@@ -168,46 +164,50 @@ public class FormUtls {
 
         if (type.equals("class java.lang.Boolean")||type.equals("boolean")) {
 
-            Method m = null;
             if (isSet) {
-                m = object.getClass().getMethod("set" + name, Boolean.class);
-                String value = getContent(view);
-                if (!value.equals("true") && !value.equals("false")) {
+
+                Boolean value =null;
+                if (!getContent(view).equals("true") && !getContent(view).equals("false")) {
                     throw new RuntimeException("switchButton必须是boolean值");
                 }
-                m.invoke(object, Boolean.parseBoolean(value));
+                 value = Boolean.parseBoolean(getContent(view));
+
+                field.set(object,value);
             } else {
-                m = object.getClass().getMethod("get" + name);
-                setContent(view, m.invoke(object) + "");
+                Object val = field.get(object);//得到此属性的值
+                setContent(view,val.toString() + "");
             }
 
         }
 
         if (type.equals("class java.lang.Long")||type.equals("long")) {
 
-            Method m = null;
+
             if (isSet) {
-                m = object.getClass().getMethod("set" + name, Long.class);
-                try {
-                m.invoke(object, Long.parseLong(getContent(view)));
-                }catch (Exception e){}
+                    Long value =null;
+                    try {
+                        value = Long.parseLong(getContent(view));
+                    }catch (Exception e){}
+                    field.set(object,value);
             } else {
-                m = object.getClass().getMethod("get" + name);
-                setContent(view, m.invoke(object) + "");
+                Object val = field.get(object);//得到此属性的值
+                setContent(view,val.toString() + "");
             }
 
         }
         if (type.equals("class java.lang.Double")||type.equals("double")) {
 
-            Method m = null;
+
             if (isSet) {
-                m = object.getClass().getMethod("set" + name, Double.class);
+
+                Double value =null;
                 try {
-                m.invoke(object, Double.parseDouble(getContent(view)));
+                    value = Double.parseDouble(getContent(view));
                 }catch (Exception e){}
+                field.set(object,value);
             } else {
-                m = object.getClass().getMethod("get" + name);
-                setContent(view, m.invoke(object) + "");
+                Object val = field.get(object);//得到此属性的值
+                setContent(view,val.toString() + "");
             }
 
         }
@@ -215,6 +215,12 @@ public class FormUtls {
     }
 
     static String getContent(View v) {
+
+
+        if (v instanceof FormSpinner) {
+            int value = (int) ((FormSpinner) v).getSelectValue();
+            return value+"";
+        }
 
         if (v instanceof CheckBox) {
 
@@ -282,7 +288,7 @@ public class FormUtls {
      *
      * @return
      */
-    public static boolean checkParam(FormCheckInterface page) {
+    private static boolean checkParam(FormCheckInterface page) {
 
 
         HashMap<String, ViewAttribute> map = FormInit.allLineFormViewMap.get(page.getClass().getName());
@@ -292,7 +298,7 @@ public class FormUtls {
                 ViewAttribute va = map.get(key);
                 if (TextUtils.isEmpty(getContent(va.getView())) && !va.isNull()) {
                     if(page!=null){
-                        page.formCheckNullCall(va.getView(), "请正确输入" + va.getMessage());
+                        page.formCheckParamCall(va.getView(), "请正确输入" + va.getMessage());
                         return false;
                     }else {
                         new RuntimeException("没有找到 验证界面");
@@ -317,7 +323,7 @@ public class FormUtls {
      * @param va
      * @return
      */
-    public static boolean check(FormCheckInterface page, ViewAttribute va) {
+    private static boolean check(FormCheckInterface page, ViewAttribute va) {
         //自定义检查信息
         if (!page.formCheck(va.getView())) {
 //            page.formCheckParamCall(va.getView(), "");

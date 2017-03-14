@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:form="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.sh.shformutils.Main2Activity">
+    <com.sh.zsh.code.layout.ShFormLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            form:less_form_group_titel="true"
+            android:text="基本信息"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <EditText
+            form:less_form_title="用户姓名"
+            form:less_form_must="true"
+            form:less_form_name="userNmae"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <EditText
+            form:less_form_title="联系电话"
+            form:less_form_must="true"
+            form:less_form_name="userPhone"
+            form:less_form_check_type="phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            form:less_form_group_top_layout="true"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="80dp">
+            <Button
+                android:id="@+id/button"
+                android:text="我就要放个按钮"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            form:less_form_group_titel="true"
+            android:text="其他信息"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <CheckBox
+            form:less_form_title="是否买房"
+            form:less_form_name="haveHouser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.sh.zsh.code.layout.view.FormTimeView
+            form:less_form_title="买房时间"
+            form:less_form_name="houseTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.sh.zsh.code.layout.view.FormSpinner
+            android:id="@+id/spinner"
+            form:less_form_title="区域"
+            form:less_form_spi_sel="0"
+            form:less_form_name="pattern"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <EditText
+            form:less_form_title="地点"
+            form:less_form_name="area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:inputType="number"
+            form:less_form_title="单价"
+            form:less_form_name="price"
+            form:less_form_check_type="amount_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <EditText
+            android:inputType="number"
+            form:less_form_title="楼层"
+            form:less_form_name="layer"
+            form:less_form_check_type="amount_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.sh.zsh.code.layout.ShFormLayout>
+</RelativeLayout>

@@ -11,6 +11,5 @@ public interface FormCheckInterface {
     public boolean formCheck(View v) ;
     //检查参数回掉
     public void formCheckParamCall(View v, String message);
-    //检查参数为空回调
-    public void formCheckNullCall(View v, String message);
+
 }

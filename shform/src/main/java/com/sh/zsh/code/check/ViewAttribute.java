@@ -2,6 +2,8 @@ package com.sh.zsh.code.check;
 
 import android.view.View;
 
+import com.sh.zsh.code.check.CheckType;
+
 /**
  * Created by zhush on 2016/10/8.
  * E-mail zhush@jerei.com

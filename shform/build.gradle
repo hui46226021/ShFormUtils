@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
 
-////配置插件
-//apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
-//
-//version = "2.0.8"       //这个是版本号，必须填写
+//配置插件
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = "2.0.8"       //这个是版本号，必须填写
 
 android {
     compileSdkVersion 24
@@ -34,4 +34,5 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.sh.zsh.code:pickerview:2.1.2'
 }
