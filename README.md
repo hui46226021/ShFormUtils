@@ -140,40 +140,40 @@ ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单�
 
 ![](3.png)
 
+
+废话少说 上代码！！！
 ~~~xml
-
-
    <com.sh.zsh.code.layout.ShFormLayout
      <!--该布局 需要在这确定 每行的高度 -->
                  app:less_form_row_height="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+            <!--这里  less_form_group_titel 表明 这个控件 只是用于显示标题-->
                 <TextView
-                    <!--这里表明 这个控件 只是用于显示标题-->
                     app:less_form_group_titel="true"
                     android:text="基本信息"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+             <!--less_form_title该行的标题-->
+             <!--less_form_name  该行对应的字段名-->
+             <!--less_form_must 该行是否必填-->
                 <EditText
-                    <!--该行的标题-->
                     app:less_form_title="姓名"
-                    <!--该行对应的字段名-->
                     app:less_form_name="name"
-                    <!--该行是否必填-->
                     app:less_form_must="true"
                      android:layout_height="wrap_content"
                      android:layout_width="match_parent"
                    />
-
+        <!-- less_form_check_type 该行的验证方式-->
                 <EditText
                     app:less_form_title="电话"
-                    <!--该行的验证方式-->
                     app:less_form_check_type="phone"
                     app:less_form_name="phone"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     app:less_form_must="true"
                     />
+                    <!--选择器控件 使用方法 参考demo-->
                 <com.sh.zsh.code.layout.view.FormSpinner
                     android:id="@+id/company"
                     app:less_form_title="公司"
@@ -188,7 +188,7 @@ ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单�
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     app:less_form_must="true" />
-
+                <!--时间选择器控件-->
                 <com.sh.zsh.code.layout.view.FormTimeView
                     app:less_form_title="出生日期"
                     app:less_form_name="birthday"
