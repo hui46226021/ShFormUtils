@@ -136,7 +136,7 @@ compile 'com.sh.zsh.code:shform:3.2.2'
 ##  快速生成表单布局 ShFormLayout
 
 ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单布局 样式
-![](3.gif)
+![](3.png)
 
 ~~~xml
 
@@ -230,10 +230,10 @@ ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单�
 
 ### 界面预览
 
-![](4.gif)
+![](4.png)
 
 快看，你不需要去关心 每一行的样式，高度 只需要确定这一行是 TextView  或是EditText 等控件  就可以了
-我们来看一下  框架都提供了 那些表单属性属性 供我们使用
+我们来看一下  框架都提供了 哪些表单属性 供我们使用
 * ShFormLayout  <br>
 less_form_row_height  表单每行的 高度
 * 内部控件<br>
