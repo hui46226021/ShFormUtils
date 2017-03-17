@@ -1,24 +1,24 @@
 # ShFormUtils
-android表单映射框架
-#Download
+android表单映射框架 SHFormLayout 快速生成表单布局
+# Download
 
 Download the latest JAR or grab via Maven:
 ~~~xml
 <dependency>
   <groupId>com.sh.zsh.code</groupId>
   <artifactId>shform</artifactId>
-  <version>2.0.8</version>
+  <version>3.2.2</version>
   <type>pom</type>
 </dependency>
 ~~~
 or Gradle:
 ~~~gradle
-compile 'com.sh.zsh.code:shform:2.0.8'
+compile 'com.sh.zsh.code:shform:3.2.2'
 ~~~
-#功能
-* 表单对象映射
+# 功能
+## 表单对象映射
 
-   * 1.页面实现 FormCheckInterface 接口
+   * 1.页面实现 FormCheckInterface 接口   改接口 是页面表单检查的回调 下面有介绍
    * 2.开启表单注入 FormInit.injection(this);
    ~~~java
          @Override
@@ -79,8 +79,10 @@ compile 'com.sh.zsh.code:shform:2.0.8'
          FormUtls.objectToForm(this,userModel);
   ~~~
 ![](1.gif)
-*  表单参数检查
-    * 1.使用 @FormCheck 实现表单验证
+##  表单参数检查
+
+    * 1.使用 @FormCheck
+
 ~~~java
    //type 是 验证类型枚举   默认 是自定义验证
     @FormCheck(type = CheckType.Phone)
@@ -110,15 +112,6 @@ compile 'com.sh.zsh.code:shform:2.0.8'
         }
 
         /**
-         * 表单检查 为空回调
-         * @param v
-         * @param message
-         */
-        @Override
-        public void formCheckParamCall(View v, String message) {
-            Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
-        }
-        /**
          * 表单检查 不合法回调
          * @param v
          * @param message
@@ -128,5 +121,141 @@ compile 'com.sh.zsh.code:shform:2.0.8'
             Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
         }
 ~~~
+#### 验证类型
+    CUSTOM,//自定义
+    PHONE,//手机号
+    EMAIL,//邮箱
+    CHINESE,//中文
+    IDCARD,//身份证
+    ISDATA,//“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年
+    AMOUNT_MONEY,//金额校验，精确到2位小数
+    AMOUNT,//存数字
+    URL,//Url
+    PASSWORD;//密码强度 是不是6至12位字母组合
+
+##  快速生成表单布局 ShFormLayout
+
+ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单布局 样式
+![](3.gif)
+
+~~~xml
+
+
+   <com.sh.zsh.code.layout.ShFormLayout
+     <!--该布局 需要在这确定 每行的高度 -->
+                 app:less_form_row_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    <!--这里表明 这个控件 只是用于显示标题-->
+                    app:less_form_group_titel="true"
+                    android:text="基本信息"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    <!--该行的标题-->
+                    app:less_form_title="姓名"
+                    <!--该行对应的字段名-->
+                    app:less_form_name="name"
+                    <!--该行是否必填-->
+                    app:less_form_must="true"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                   />
+
+                <EditText
+                    app:less_form_title="电话"
+                    <!--该行的验证方式-->
+                    app:less_form_check_type="phone"
+                    app:less_form_name="phone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:less_form_must="true"
+                    />
+                <com.sh.zsh.code.layout.view.FormSpinner
+                    android:id="@+id/company"
+                    app:less_form_title="公司"
+                    app:less_form_name="company"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:less_form_must="true" />
+                <com.sh.zsh.code.layout.view.FormSpinner
+                    android:id="@+id/department"
+                    app:less_form_title="部门"
+                    app:less_form_name="department"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:less_form_must="true" />
+
+                <com.sh.zsh.code.layout.view.FormTimeView
+                    app:less_form_title="出生日期"
+                    app:less_form_name="birthday"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:less_form_must="true" />
+
+                <CheckBox
+                    app:less_form_title="男性："
+                    app:less_form_name="sex"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:less_form_must="true" />
+
+                <LinearLayout
+                    app:less_form_group_top_layout="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="18dp"
+                        android:textSize="@dimen/form_text_size"
+                        android:text="签名" />
+
+                    <EditText
+                        android:id="@+id/sign"
+                        android:gravity="top"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="16dp"
+                        android:padding="5dp"
+                        android:textSize="@dimen/form_text_size"
+                        android:background="@drawable/bg_text_factoryaudit"
+                        android:hint="多行输入" />
+                </LinearLayout>
+            </com.sh.zsh.code.layout.ShFormLayout>
+~~~
+
+### 界面预览
+
+![](4.gif)
+
+快看，你不需要去关心 每一行的样式，高度 只需要确定这一行是 TextView  或是EditText 等控件  就可以了
+我们来看一下  框架都提供了 那些表单属性属性 供我们使用
+* ShFormLayout  <br>
+less_form_row_height  表单每行的 高度
+* 内部控件<br>
+less_form_title   名称<br>
+less_form_title_image  设置名称左侧的icon<br>
+less_form_can_click    该行是否显示 右侧箭头<br>
+less_form_must         该字段是否必填<br>
+less_form_name        该字段对应实体类的字段名称<br>
+less_form_is_null     该字段是否可以为空<br>
+less_form_bottomLine  该行是否显示底部横线
+less_form_check_type  检查类型
+less_form_group_titel 该组表单的标题 （上面的例子里 基本信息 那一行）
+less_form_group_top_layout  改控件不 参与表单映射 和布局生成（上面的例子里签名 那个布局）
+* FormTimeView  时间控件<br>
+less_time_is_time  时间控件的格式（all，year_month_day，hours_mins，month_day_hour_min，year_month）<br>
+* FormSpinner  选择器  用法参考Demo<br>
+less_form_spi_sel 默认选中第一项
+
+
+
+
+
+
 
 
