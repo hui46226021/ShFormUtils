@@ -43,13 +43,12 @@ public class FormTimeView extends TextView{
                 showPvTime();
             }
         });
+
+        initPvTime();
     }
 
 
-    /**
-     * 显示时间控件
-     */
-    public void showPvTime(){
+    public void initPvTime(){
         //时间选择器
         switch (isTime){
             case 1:
@@ -86,6 +85,13 @@ public class FormTimeView extends TextView{
                 FormTimeView.super.setText(getTimeStringByDate(date));
             }
         });
+    }
+
+    /**
+     * 显示时间控件
+     */
+    public void showPvTime(){
+
         pvTime.show();
     }
 
